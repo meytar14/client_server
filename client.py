@@ -4,6 +4,7 @@ import time
 
 # open UDP socket
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+# set the socket time out to be 1 sec
 sock.settimeout(1)
 
 #server's features
@@ -26,11 +27,13 @@ try:
             # show the recived msg
             print("Received " + str(data))
             end = time.time();
+            # calc the elapsed (rtt)
             rtt = end - start
             print("RTT: " + str(rtt) + " seconds\n")
         except socket.timeout:
-            print("Request " + str(i) + " Timed out")
+            print("Request " + str(i) + " Timed out\n")
 
 finally:
+    # close the socket
     print("closing socket")
     sock.close()
